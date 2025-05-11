@@ -37,7 +37,7 @@ const BankTransferModal = ({
             <div className="bg-base-300 mb-3 rounded p-3 font-mono text-sm">
               <div className="mb-1 flex justify-between">
                 <span className="text-base-content/70">Account Name:</span>
-                <span className="font-semibold">PC Builders Ltd</span>
+                <span className="font-semibold">PC Makers Ltd</span>
               </div>
               <div className="mb-1 flex justify-between">
                 <span className="text-base-content/70">Account Number:</span>

@@ -240,7 +240,7 @@ const OrderConfirmationPage = () => {
               </div>
               <div className="mb-1 grid grid-cols-2">
                 <span className="font-medium">Account Name:</span>
-                <span>PC Builders Inc.</span>
+                <span>PC Makers Inc.</span>
               </div>
               <div className="mb-1 grid grid-cols-2">
                 <span className="font-medium">Account Number:</span>
@@ -270,7 +270,7 @@ const OrderConfirmationPage = () => {
               </div>
               <div className="mb-1 grid grid-cols-2">
                 <span className="font-medium">Store Address:</span>
-                <span>PC Builders Store, 123 Tech Street, Dhaka</span>
+                <span>PC Makers Store, 123 Tech Street, Dhaka</span>
               </div>
               <div className="mb-1 grid grid-cols-2">
                 <span className="font-medium">Store Hours:</span>

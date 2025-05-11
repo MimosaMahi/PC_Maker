@@ -24,7 +24,7 @@ const Footer = () => {
           <div className="col-span-2 mb-4 md:col-span-1 md:mb-0">
             <div className="mb-2 flex items-center md:mb-4">
               <Cpu className="text-primary mr-2" size={20} />
-              <h2 className="text-xl font-bold md:text-2xl">PC Builders</h2>
+              <h2 className="text-xl font-bold md:text-2xl">PC Makers</h2>
             </div>
             <p className="mb-4 text-xs opacity-75 md:text-sm">
               Your one-stop shop for custom PC builds and high-quality
@@ -191,7 +191,7 @@ const Footer = () => {
         {/* Copyright */}
         <div className="border-primary/80 mt-4 border-t pt-4 text-center md:mt-8 md:pt-4">
           <p className="text-xs opacity-50 md:text-sm">
-            © {currentYear} PC Builders. All rights reserved.
+            © {currentYear} PC Makers. All rights reserved.
           </p>
           <div className="mt-2 space-x-4 text-xs">
             <Link

@@ -28,11 +28,11 @@ const sendContactMessage = async (req, res) => {
 
         // Email options
         const mailOptions = {
-            from: `"PC Builders Contact" <${process.env.EMAIL_USER}>`,
+            from: `"PC Makers Contact" <${process.env.EMAIL_USER}>`,
             to: process.env.ADMIN_EMAIL || process.env.EMAIL_USER,
             subject: subject || `Contact Form Message from ${name}`,
             html: `
-        <h3>New Contact Message from PC Builders Website</h3>
+        <h3>New Contact Message from PC Makers Website</h3>
         <p><strong>Name:</strong> ${name}</p>
         <p><strong>Email:</strong> ${email}</p>
         <p><strong>Message:</strong> ${message}</p>

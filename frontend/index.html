@@ -13,3 +13,298 @@
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Floating Chat Widget</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        
+        /* Floating chat button */
+        .chat-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background-color: #4a6bff;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        
+        .chat-button:hover {
+            transform: scale(1.1);
+        }
+        
+        /* Chat container - initially hidden */
+        .chat-container {
+            position: fixed;
+            bottom: 90px;
+            right: 20px;
+            width: 350px;
+            height: 0;
+            border-radius: 10px 10px 0 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            background-color: white;
+            transition: height 0.3s ease;
+            z-index: 1000;
+        }
+        
+        .chat-container.open {
+            height: 500px;
+        }
+        
+        .chat-header {
+            background-color: #032ad6;
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+        
+        .chat-body {
+            flex: 1;
+            padding: 15px;
+            background-color: white;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .chat-container.open .chat-body {
+            display: flex;
+        }
+        
+        .welcome-message {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .divider {
+            border-top: 1px solid #e0e0e0;
+            margin: 15px 0;
+        }
+        
+        .start-conversation {
+            background-color: #0d2aba;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        
+        .business-hours {
+            font-size: 12px;
+            color: #390ad2;
+            text-align: center;
+            margin-top: 5px;
+        }
+        
+        .footer {
+            font-size: 10px;
+            color: #999;
+            text-align: center;
+            padding: 10px;
+            background-color: #f9f9f9;
+            display: none;
+        }
+        
+        .chat-container.open .footer {
+            display: block;
+        }
+        
+        /* Close button */
+        .close-chat {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        /* Chat message bubble */
+        .chat-message {
+            background-color: #0d011f;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            max-width: 80%;
+        }
+
+        /* User input area */
+        .chat-input-area {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .chat-input {
+            width: 80%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .send-button {
+            background-color: #03114e;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .preset-button {
+            background-color: #f1f1f1;
+            border: 1px solid #ccc;
+            padding: 8px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+        .preset-button:hover {
+            background-color: #e0e0e0;
+        }
+
+    </style>
+</head>
+<body>
+    <!-- Floating chat button -->
+    <div class="chat-button" id="chatButton">
+        💬
+    </div>
+    
+    <!-- Chat container -->
+    <div class="chat-container" id="chatContainer">
+        <button class="close-chat" id="closeChat">×</button>
+        <div class="chat-header">
+            <h3>Hi there! How can we help you today?</h3>
+        </div>
+        
+        <div class="chat-body" id="chatBody">
+            <div class="welcome-message">
+                <p>Our support heroes are here to assist you.</p>
+            </div>
+            
+            <div class="divider"></div>
+            
+            <button class="start-conversation" id="startConversation">Start Conversation</button>
+            
+            <div class="preset-questions">
+                <button class="preset-button" onclick="askQuestion('What are your business hours?')">What are your business hours?</button>
+                <button class="preset-button" onclick="askQuestion('How can I contact support?')">How can I contact support?</button>
+                <button class="preset-button" onclick="askQuestion('What services do you offer?')">What services do you offer?</button>
+            </div>
+            
+            <div class="business-hours">We are currently out of business hours</div>
+        </div>
+        
+        <div class="chat-input-area">
+            <input type="text" id="userInput" class="chat-input" placeholder="Type your message...">
+            <button class="send-button" id="sendButton">Send</button>
+        </div>
+
+        <div class="footer">
+            Powered by Your Chatbot 💬
+        </div>
+    </div>
+
+    <script>
+    const chatButton = document.getElementById('chatButton');
+    const chatContainer = document.getElementById('chatContainer');
+    const closeChat = document.getElementById('closeChat');
+    const startConversation = document.getElementById('startConversation');
+    const chatBody = document.getElementById('chatBody');
+    const sendButton = document.getElementById('sendButton');
+    const userInput = document.getElementById('userInput');
+
+    // Predefined Q&A
+    const faq = {
+        "what are your business hours": "Our business hours are Mon-Fri: 9AM-8PM  & Sat: 10AM-6PM",
+        "how can i contact support": "You can contact support via email at support@pcbuilders.com or call +880 1234-567890.",
+        "how can i build my pc": "please go to 'Build PC' and you can build your PC there.","hello":"hello, how can i help you?","What services do you offer?":"We provide PC components and Customize PC Buildup."
+    };
+
+    // Normalize text (lowercase, remove punctuation)
+    function normalize(text) {
+        return text.toLowerCase().replace(/[^\w\s]/gi, '').trim();
+    }
+
+    // Send user input
+    sendButton.addEventListener('click', function () {
+        const rawMessage = userInput.value.trim();
+        if (rawMessage) {
+            const message = normalize(rawMessage);
+            addChatMessage('You: ' + rawMessage);
+            userInput.value = '';
+
+            setTimeout(() => {
+                if (faq[message]) {
+                    addChatMessage('Chatbot: ' + faq[message]);
+                } else {
+                    addChatMessage("Chatbot: I'm not sure how to answer that yet, but a human will follow up soon!");
+                }
+            }, 800);
+        }
+    });
+
+    // Add chat message to the chat body
+    function addChatMessage(message) {
+        const messageElement = document.createElement('div');
+        messageElement.classList.add('chat-message');
+        messageElement.innerText = message;
+        chatBody.appendChild(messageElement);
+        chatBody.scrollTop = chatBody.scrollHeight;
+    }
+
+    // Preset question buttons
+    function askQuestion(question) {
+        const normalized = normalize(question);
+        addChatMessage('You: ' + question);
+        setTimeout(() => {
+            if (faq[normalized]) {
+                addChatMessage('Chatbot: ' + faq[normalized]);
+            } else {
+                addChatMessage("Chatbot: Sorry, I don't have an answer for that yet.");
+            }
+        }, 800);
+    }
+
+    // Chat open/close controls
+    chatButton.addEventListener('click', function () {
+        chatContainer.classList.toggle('open');
+    });
+
+    closeChat.addEventListener('click', function () {
+        chatContainer.classList.remove('open');
+    });
+
+    startConversation.addEventListener('click', function () {
+        alert('Connecting you to our support team...');
+    });
+    </script>
+</body>
+</html>

@@ -161,7 +161,7 @@ const Navbar = () => {
           <Link to="/products" className="btn btn-ghost justify-start">
             All Products
           </Link>
-          <Link to="/build-pc" className="btn btn-ghost justify-start">
+          <Link to="/build-pc " className="btn btn-ghost justify-start">
             Build PC
           </Link>
           <Link to="/contact" className="btn btn-ghost justify-start">

@@ -285,7 +285,7 @@ const PreBuiltPCPage = () => {
 
             <aside className="mx-auto flex max-w-md flex-col items-center justify-center gap-1 py-4 text-center md:max-w-3xl">
               <p className="font-medium">
-                Looking for more customization? Visit our PC Builder page to
+                Looking for more customization? Visit our PC Makers page to
                 create a completely custom build.
               </p>
               <p className="text-base-content/70 mt-1 text-sm">

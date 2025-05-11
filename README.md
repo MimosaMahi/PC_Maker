@@ -1,4 +1,4 @@
-# PC Builders
+# PC Makers
 
 A full-stack e-commerce application for building and purchasing PC components
 
